@@ -1,4 +1,4 @@
-<img src="assets/logo.png" alt="logo">
+<a href="relaxed-brattain-9e79af.netlify.app">relaxed-brattain-9e79af.netlify.app</a>
 
 <h1 align="center">
   Sistema para registro de entrada e saída.
