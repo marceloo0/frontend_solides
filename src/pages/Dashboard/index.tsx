@@ -40,11 +40,6 @@ interface Appointment {
   };
 }
 
-interface AvailabilityItem {
-  hour: number;
-  available: boolean;
-}
-
 const Dashboard: React.FC = () => {
   const { user, signOut } = useAuth();
   const { addToast } = useToast();
@@ -52,9 +47,7 @@ const Dashboard: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
-  const [availability, setAvailability] = useState<AvailabilityItem[]>([]);
-
-  const [selectedProvider, setSelectedProvider] = useState<string>(user.id);
+  const [selectedProvider] = useState<string>(user.id);
 
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
@@ -71,21 +64,6 @@ const Dashboard: React.FC = () => {
   const handleMonthChange = useCallback((month: Date) => {
     setCurrentMonth(month);
   }, []);
-
-  // Busca na api agendamentos num dia especifico do usuario logado
-  useEffect(() => {
-    api
-      .get(`/providers/${selectedProvider}/day-availability`, {
-        params: {
-          year: selectedDate.getFullYear(),
-          month: selectedDate.getMonth() + 1,
-          day: selectedDate.getDate(),
-        },
-      })
-      .then(response => {
-        setAvailability(response.data);
-      });
-  }, [selectedProvider, selectedDate]);
 
   // Busca na api agendamentos num mês especifico do usuario logado
   useEffect(() => {
