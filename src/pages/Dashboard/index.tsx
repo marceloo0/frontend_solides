@@ -104,11 +104,15 @@ const Dashboard: React.FC = () => {
   // Faz o agendamento na base de dados
   const handleCreateAppointment = useCallback(async () => {
     try {
-      const date = format(new Date(selectedDate), 'yyyy-MM-dd HH:mm:00');
+      const date = new Date(selectedDate);
+
+      const hora = date.getHours()+3;
+      date.setHours(hora);
+      const newDate = format(date, 'yyyy-MM-dd HH:mm:00');
 
       await api.post('appointments', {
         user_id: selectedProvider,
-        date,
+        date: newDate,
       });
 
       addToast({
