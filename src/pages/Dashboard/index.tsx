@@ -121,15 +121,15 @@ const Dashboard: React.FC = () => {
 
         setAppointments(appointmentsFormatted);
       });
-  }, [appointments, selectedDate]);
+  }, [selectedDate]);
 
   // Faz o agendamento na base de dados
   const handleCreateAppointment = useCallback(async () => {
     try {
       const date = format(new Date(selectedDate), 'yyyy-MM-dd HH:mm:00');
 
-      await api.post('/appointments', {
-        user_id: user.id,
+      await api.post('appointments', {
+        user_id: selectedProvider,
         date,
       });
 
@@ -146,7 +146,7 @@ const Dashboard: React.FC = () => {
           'Ocorreu um erro ao tentar criar um horário, tente novamente!',
       });
     }
-  }, [addToast, selectedDate, user.id]);
+  }, [addToast, selectedDate, selectedProvider]);
 
   // Desabilita dias passados
   const disabledDays = useMemo(() => {
