@@ -99,7 +99,7 @@ const Dashboard: React.FC = () => {
 
         setAppointments(appointmentsFormatted);
       });
-  }, [selectedDate]);
+  }, [selectedDate, appointments]);
 
   // Faz o agendamento na base de dados
   const handleCreateAppointment = useCallback(async () => {
